@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Book
@@ -24,7 +23,6 @@ public class Book
 	private String title;
 	
 	@OneToOne
-	@PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
 	private Publisher publisher;
 	
 	@ManyToMany
@@ -32,6 +30,11 @@ public class Book
 	inverseJoinColumns = @JoinColumn(name = "author_id"))
 	private Set<Author> authors = new HashSet<>();
 
+	public Book()
+	{
+		
+	}
+	
 	public Book(String isbn, String title, Publisher publisher)
 	{
 		this.isbn = isbn;

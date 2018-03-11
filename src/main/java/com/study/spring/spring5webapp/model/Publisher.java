@@ -15,6 +15,11 @@ public class Publisher
 	private String addressLine1;
 	private String city;
 	
+	public Publisher()
+	{
+		
+	}
+	
 	public Publisher(String name, String address, String city)
 	{
 		this.name = name;
