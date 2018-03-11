@@ -1,5 +1,6 @@
 package com.study.spring.spring5webapp.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Book
@@ -19,13 +21,27 @@ public class Book
 	
 	private String isbn;
 	private String title;
-	private String publisher;
+	
+	@OneToOne
+	private Publisher publisher;
 	
 	@ManyToMany
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), 
 	inverseJoinColumns = @JoinColumn(name = "author_id"))
-	private Set<Author> authors;
+	private Set<Author> authors = new HashSet<>();
 
+	public Book()
+	{
+		
+	}
+	
+	public Book(String isbn, String title, Publisher publisher)
+	{
+		this.isbn = isbn;
+		this.title = title;
+		this.publisher = publisher;
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -57,15 +73,15 @@ public class Book
 		this.title = title;
 	}
 
-	public String getPublisher() {
+	public Publisher getPublisher() {
 		return publisher;
 	}
 
-	public void setPublisher(String publisher) {
+	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
 	}
 	/**
-	 * TODO implement equals, hascode and toString
+	 * TODO implement equals, hashcode and toString
 	 */
 	
 }
